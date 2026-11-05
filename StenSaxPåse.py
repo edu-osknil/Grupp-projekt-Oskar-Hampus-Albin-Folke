@@ -21,8 +21,8 @@ class Sten():
     förlust = Drag.påse
     oavgjort = Drag.sten
 
+val = {"sax" : Sax, "påse" : Påse, "sten" :Sten}
 
-SSP=["sten","sax","påse"]
 namn=input("Namn: ")
 
 def taOmgångar():
