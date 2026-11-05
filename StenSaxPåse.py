@@ -21,7 +21,7 @@ class Sten():
     förlust = Drag.påse
     oavgjort = Drag.sten
 
-val = {"sax" : Sax, "påse" : Påse, "sten" :Sten}
+val = {"sax" : Sax, "påse" : Påse, "sten" : Sten}
 
 namn=input("Namn: ")
 
