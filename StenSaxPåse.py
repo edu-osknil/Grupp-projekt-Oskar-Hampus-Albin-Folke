@@ -1,4 +1,16 @@
 import random as rand
+import enum
+
+class Drag(enum):
+    sten = 0
+    sax = 1
+    påse = 2
+
+class Sax():
+    vinst = Drag.påse
+    förlust = Drag.sten
+    oavgjort = Drag.sax
+
 
 SSP=["sten","sax","påse"]
 namn=input("Namn: ")
@@ -10,7 +22,7 @@ def taOmgångar():
         except:
             print("Felaktig inmatning, skriv ett tal")
 
-ggr = taOmgångar();
+ggr = taOmgångar()
 for i in range(ggr):
     valStr=0
     while not valStr in SSP:
