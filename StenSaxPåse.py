@@ -2,10 +2,15 @@ import random as rand
 
 SSP=["sten","sax","påse"]
 namn=input("Namn: ")
-try:
-    ggr=int(input("Antal omgångar: "))
-except:
-    print("Felaktig inmatning, skriv ett tal")
+
+def taOmgångar():
+    while True:
+        try:
+            return(int(input("Antal omgångar: ")))
+        except:
+            print("Felaktig inmatning, skriv ett tal")
+
+ggr = taOmgångar();
 for i in range(ggr):
     valStr=0
     while not valStr in SSP:
