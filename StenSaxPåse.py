@@ -11,6 +11,16 @@ class Sax():
     förlust = Drag.sten
     oavgjort = Drag.sax
 
+class Påse():
+    vinst = Drag.sten
+    förlust = Drag.sax
+    oavgjort = Drag.påse
+
+class Sten():
+    vinst = Drag.sax
+    förlust = Drag.påse
+    oavgjort = Drag.sten
+
 
 SSP=["sten","sax","påse"]
 namn=input("Namn: ")
