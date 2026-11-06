@@ -23,12 +23,12 @@ class Sten():
 
 val = {"sax" : Sax, "påse" : Påse, "sten" : Sten}
 
-namn=input("Namn: ")
+namn=input("Ange ditt spelarnamn -> ")
 
 def taOmgångar():
     while True:
         try:
-            return(int(input("Antal omgångar: ")))
+            return(int(input("Ange antal omgångar som ska spelas: ")))
         except:
             print("Felaktig inmatning, skriv ett tal")
 
