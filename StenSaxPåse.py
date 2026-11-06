@@ -1,7 +1,7 @@
 import random as rand
-import enum
+from enum import Enum
 
-class Drag(enum):
+class Drag(Enum):
     sten = 0
     sax = 1
     påse = 2
