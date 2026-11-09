@@ -39,9 +39,18 @@ def GetAction():
             return val[action]
         else:
             print("Ogilltig handling")
+
+def PrintState(winning):
+    pythonState = f"Python: {loss:>5}"
+    playerState = f"{playerName}: {win:>5}"
+    upper = playerState if winning else pythonState
+    lower = pythonState if winning else playerState
+    print(f"\nStällning\n{'-' * 20}")
+    print(upper)
+    print(f"{lower}\n")
+
 win = 0
 loss = 0
-logicScore = 0
 rounds = GetRounds()
 for i in range(rounds):
     action = GetAction()
@@ -49,25 +58,18 @@ for i in range(rounds):
     if action.win == computerAction:
         print(f"Python valde {computerAction.name}, du vann!")
         win += 1
-        logicScore += 1
     elif action.loss == computerAction:
         print(f"Python valde {computerAction.name}, du förlorade!")
         loss += 1
-        logicScore -= 1
     else:
         print(f"Python valde {computerAction.name}, Oavgjort!") 
-    print(f"ställningen är {win}, {loss} ", end="")
-    if logicScore == 0:
-        print("oavgjort")
-    elif logicScore >= 0:
-        print(f"till {playerName}")
-    else:
-        print("till Python")
-    print("\n")
+    PrintState(win > loss)
 
-if logicScore == 0:
-    print("oavgjort")
-elif logicScore >= 0:
+
+PrintState(win > loss)
+if win > loss:
     print(f"{playerName} vann")
-else:
+elif loss > win:
     print("Python vann")
+else:
+    print("oavgjort")
