@@ -14,3 +14,5 @@ påbörjade stenSaxPåse samt skapade hänga gubbe
 
 Hampus
 började med ordgissningsspelet aka hänga gubbe. Skapade en lista med ord på 9 bokstäver. gjorde så att det slumpades fram ett random ord wrån listan, sedan gjorde jag en funktion som kollade om det var en bokstav. Slutligen kollade om det fanns i ordet.
+
+Började på spelloopen
