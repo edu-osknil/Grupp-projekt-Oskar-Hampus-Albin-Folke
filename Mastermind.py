@@ -15,9 +15,13 @@ så blir responsen ✔▢▢
 Du får välja mellan två svårighetsnivåer:
 Lättare nivå: Alla siffror är garanterat olika
 Svårare nivå: Det kan finnas upprepningar av en eller flera siffror""")
-    
-    ans=input("Ange önskad nivå: lättare (1), svårare (2) -> ")
-    return ans
+    global ans
+    while True:
+        try:
+            ans=int(input("Ange önskad nivå: lättare (1), svårare (2) -> "))
+            return ans
+        except:
+            print("Felaktig inmatning")
 
 def codeGen():
     num=list(range(1,7))
@@ -29,5 +33,18 @@ def codeGen():
             code.append(rand.randint(1,6))
     return "".join(code)
 
-
-
+def guess(guess, idx):
+    global guesses
+    guesses.pop(idx)
+    guesses.insert(idx, guess)
+    print("""Drag #    Drag        Feedback
+-------------------------------------------""")
+    for i in range(12,0,-1):
+        print(f"\n{i:<4}",end="")
+        try:
+            print(guesses[i-1])
+        except:
+            pass
+guesses=[]
+for i in range(12):
+    guesses.append(0)
