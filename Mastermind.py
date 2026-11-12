@@ -14,45 +14,50 @@ så blir responsen ✔▢▢
 
 Du får välja mellan två svårighetsnivåer:
 Lättare nivå: Alla siffror är garanterat olika
-Svårare nivå: Det kan finnas upprepningar av en eller flera siffror""")
+Svårare nivå: Det kan finnas upprepningar av en eller flera siffror
+""")
     
-def dif(): #ändrar "ans" beroende på svar, säker inmatning
-    global ans
+def dif(): #returnerar 1 eller 2 beroende på svar, säker inmatning
     while True:
         try:
             ans=int(input("Ange önskad nivå: lättare (1), svårare (2) -> "))
-            if ans==1 or ans==2:
-                break
+            if ans==1:
+                return 1
+            if ans==2:
+                return 2
             else:
                 print("Ogiltig svårighet")
         except:
             print("Felaktig inmatning, skriv en siffra")
 
-def codeGen(): #genererar en kod beroende på om den globala variabeln "ans" är 1 eller 2
-    num=list(range(1,7))
+def codeGen(ans): #genererar en kod beroende på om inmatningen är 1 eller 2
+    num=[1,2,3,4,5,6]
     code=[]
     for i in range(4):
         if ans==1:
-            code.append(str(num[rand.randint(0,5-i)]))
+            code.append(str(num[rand.randint(0,6-i)]))
         elif ans==2:
             code.append(rand.randint(1,6))
     return "".join(code)
 
-def feedback(a): #tar emot en gissning och lägger till feedback i listan "feedback"
+def giveFeedback(a): #tar emot en gissning och returnerar feedbacken
+    retStr=[]
+    global code
     for i in range(4):
-        if a[4]==code[4]:
-            print("✓")
-    
+        if a[i]==code[i]:
+            retStr.append("✓")
     for i in a:
-        if i in codeList:
-            print("▢")
+        if i in code:
+            retStr.append("▢")
+    return "".join(retStr)
 
-def guess(a, b): #tar in en gissning (a) samt en plats (b)
+def guessPrint(a): #tar in en gissning och printar loggen för alla gissningar
     global guesses
-    guesses.insert(b-1, a)
+    guesses.append(a)
     
     #printar loggen och utgår ifrån listan guesses
-    print("""Drag #    Drag        Feedback
+    print("""
+Drag #    Drag        Feedback
 -------------------------------------------""")
     
     #printar numrerade gissningar
@@ -60,37 +65,52 @@ def guess(a, b): #tar in en gissning (a) samt en plats (b)
         print(f"\n{i:<4}",end="")
         try:
             print(f"{guesses[i-1].split(" "):<10}",end="")
-        except IndexError:
+        except:
             pass
         try:
-            print(feedback[i-1])
+            print(feedbacks[i-1])
         except IndexError:
             pass
+        print()
+
+def retry():
+    while True:
+        om=input("Vill du spela igen (j/n) --> ")
+        if input=="j":
+            return "j"
+
 
 def play():
     intro()
-
+    global code
+    global guesses
+    global feedbacks
+    
     while True:
+        won=0
         guesses=[]
+        feedbacks=[]
         
-        dif()
-        codeGen()
+        code=codeGen(dif())
         
         for i in range(1,13):
             while True:
-                guess=input("Ange gissning som följd av fyra siffror --> ")
-                if len(guess)!=4 or not guess.isdigit():
+                guess=input("\nAnge gissning som följd av fyra siffror --> ")
+                if len(guess)==4 and guess.isdigit():
+                    guesses.append(guess)
+                    break
+                else:
                     print("Din gissning är felaktig")
-            feedback(guess)
-            guess(guess,i)
+            feedbacks.append(giveFeedback(guess))
+            guessPrint(guess)
             if guess==code:
-                print("Snyggt ;-)")
+                print("Du van!")
+                won=1
                 break
         
-        retry=input("Vill du spela igen (j/n) --> ")
-        if retry=="j":
-            continue
-        elif retry=="n":
-            break
-
-    print("Programmet avslutade normalt")
+        if won==0:
+            print(f"Du förlorade. Rätt kod var: {code}")
+        
+        
+        
+    print("Play() avslutades")
