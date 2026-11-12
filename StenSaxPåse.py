@@ -1,31 +1,32 @@
 import random as rand
 from enum import Enum
+from dataclasses import dataclass
 
-class Drag(Enum):
-    sten = 0
-    sax = 1
-    påse = 2
+class Moves(Enum):
+    Rock = 0
+    Scissor = 1
+    Paper = 2
 
-class Sax():
-    win = Drag.påse
-    loss = Drag.sten
-    tie = Drag.sax
+@dataclass (frozen=True)
+class Scissor():
+    win = Moves.Paper
+    loss = Moves.Rock
 
-class Påse():
-    win = Drag.sten
-    loss = Drag.sax
-    tie = Drag.påse
+@dataclass (frozen=True)
+class Paper():
+    win = Moves.Rock
+    loss = Moves.Scissor
 
-class Sten():
-    win = Drag.sax
-    loss = Drag.påse
-    tie = Drag.sten
+@dataclass (frozen=True)
+class Rock():
+    win = Moves.Scissor
+    loss = Moves.Paper
 
-val = {"sax" : Sax, "påse" : Påse, "sten" : Sten}
-
+val = {"Scissor" : Scissor, "Paper" : Paper, "Rock" : Rock}
 playerName=input("Ange ditt spelarnamn -> ")
 
 def GetRounds():
+    '''Take a number from the user'''
     while True:
         try:
             return(int(input("Ange antal omgångar som ska spelas: ")))
@@ -33,14 +34,16 @@ def GetRounds():
             print("Felaktig inmatning, skriv ett tal")
 
 def GetAction():
+    '''Take action from user'''
     while True:
-        action = input("Välj handling (sten/sax/påse)").lower()
+        action = input("Välj handling (Rock/Scissor/Paper)").lower()
         if action in val:
             return val[action]
         else:
             print("Ogilltig handling")
 
 def PrintState(winning):
+    '''Print the current scoreboard'''
     pythonState = f"Python: {loss:>5}"
     playerState = f"{playerName}: {win:>5}"
     upper = playerState if winning else pythonState
@@ -54,7 +57,7 @@ loss = 0
 rounds = GetRounds()
 for i in range(rounds):
     action = GetAction()
-    computerAction = rand.choice(list(Drag))
+    computerAction = rand.choice(list(Moves))
     if action.win == computerAction:
         print(f"Python valde {computerAction.name}, du vann!")
         win += 1
