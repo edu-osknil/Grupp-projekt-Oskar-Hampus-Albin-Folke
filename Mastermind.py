@@ -32,22 +32,26 @@ def dif(): #returnerar 1 eller 2 beroende på svar, säker inmatning
 
 def codeGen(ans): #genererar en kod beroende på om inmatningen är 1 eller 2
     num=[1,2,3,4,5,6]
-    code=[]
+    codeT=[]
     for i in range(4):
         if ans==1:
-            code.append(str(num[rand.randint(0,6-i)]))
+            codeT.append(str(num[rand.randint(0,5-i)]))
         elif ans==2:
-            code.append(rand.randint(1,6))
-    return "".join(code)
+            codeT.append(rand.randint(1,6))
+    return "".join(codeT)
 
 def giveFeedback(a): #tar emot en gissning och returnerar feedbacken
     retStr=[]
+    g=list(a)
     global code
+    codeTemp=list(code)
     for i in range(4):
-        if a[i]==code[i]:
+        if g[i]==code[i]:
             retStr.append("✓")
+            g[i]=0
+            codeTemp[i]=0
     for i in a:
-        if i in code:
+        if i in codeTemp:
             retStr.append("▢")
     return "".join(retStr)
 
@@ -64,8 +68,8 @@ Drag #    Drag        Feedback
     for i in range(12,0,-1):
         print(f"\n{i:<4}",end="")
         try:
-            print(f"{guesses[i-1].split(" "):<10}",end="")
-        except:
+            print(f"{" ".join(guesses[i-1]):<10}",end="")
+        except IndexError:
             pass
         try:
             print(feedbacks[i-1])
@@ -76,8 +80,12 @@ Drag #    Drag        Feedback
 def retry():
     while True:
         om=input("Vill du spela igen (j/n) --> ")
-        if input=="j":
+        if om=="j":
             return "j"
+        elif om=="n":
+            return "n"
+        else:
+            print("Felaktig inmatning")
 
 
 def play():
@@ -95,12 +103,19 @@ def play():
         
         for i in range(1,13):
             while True:
+                fel=0
                 guess=input("\nAnge gissning som följd av fyra siffror --> ")
+                
                 if len(guess)==4 and guess.isdigit():
-                    guesses.append(guess)
-                    break
+                    for j in guess:
+                        if int(j)>6 or int(j)<1:
+                            fel=1
                 else:
+                    fel=1
+                if fel==1:
                     print("Din gissning är felaktig")
+                else:
+                    break
             feedbacks.append(giveFeedback(guess))
             guessPrint(guess)
             if guess==code:
@@ -111,6 +126,8 @@ def play():
         if won==0:
             print(f"Du förlorade. Rätt kod var: {code}")
         
-        
+        if retry()=="j":
+            continue
+        break
         
     print("Play() avslutades")
