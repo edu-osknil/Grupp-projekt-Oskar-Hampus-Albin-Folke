@@ -24,3 +24,11 @@ handlingarna lättlästa och organiserade. Har fortfarande små saker som bättr
 Hampus
 började med ordgissningsspelet aka hänga gubbe. Skapade en lista med ord på 9 bokstäver. gjorde så att det slumpades fram ett random ord wrån listan, sedan gjorde jag en funktion som kollade om det var en bokstav. Slutligen kollade om det fanns i ordet.
 Började på spelloopen
+
+12 november
+
+Oskar
+Jag skrev färdigt sten sax påse och hänga gubbe
+Sten sax påse var funktionellt innan idag. jag mest lade till några docstrings och bytte ut klasserna till frozen dataclass.
+Jag har bara skrivit språk i C familjen så som jag tolkade det var en frozen dataclass det närmaste man kom till en static struct.
+Jag skrev färdigt logiken i hänga gubbe så att den är funktionell. Den använder hashsets för att hålla tidskomplexiteten linjär oavsett mängden gissningar. Samt så använder jag mig av regex för att substitionera tecken man inte ville ha i utskrifterna.
