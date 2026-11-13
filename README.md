@@ -32,3 +32,6 @@ Jag skrev färdigt sten sax påse och hänga gubbe
 Sten sax påse var funktionellt innan idag. jag mest lade till några docstrings och bytte ut klasserna till frozen dataclass.
 Jag har bara skrivit språk i C familjen så som jag tolkade det var en frozen dataclass det närmaste man kom till en static struct.
 Jag skrev färdigt logiken i hänga gubbe så att den är funktionell. Den använder hashsets för att hålla tidskomplexiteten linjär oavsett mängden gissningar. Samt så använder jag mig av regex för att substitionera tecken man inte ville ha i utskrifterna.
+
+Albin
+Fortsatte på mastermind, lade till retry-funktionen, organiserade små saker, fixade feedback och gjorde programmet funktionellt. 
